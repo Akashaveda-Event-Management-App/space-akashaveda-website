@@ -11,6 +11,8 @@ import SEO from './components/SEO';
 import { SpaceBackground } from './components/SpaceBackground';
 import ScrollProgress from './components/ScrollProgress';
 import ScrollToTopButton from './components/ScrollToTop';
+import SpaceCursor from './components/SpaceCursor';
+import OrbitalPageScroller from './components/OrbitalPageScroller';
 
 // Lazy loaded pages for optimal bundle splitting
 const NotFound = lazy(() => import('./pages/NotFound'));
@@ -31,10 +33,10 @@ function ScrollToTop() {
 // Loading spinner component
 function LoadingSpinner() {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-[#070C1A]">
+    <div className="flex items-center justify-center min-h-screen bg-[#000000]">
       <div className="relative">
-        <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-blue-500/20 rounded-full"></div>
-        <div className="absolute top-0 left-0 w-16 h-16 sm:w-20 sm:h-20 border-4 border-transparent border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-[#a78bfa]/20 rounded-full"></div>
+        <div className="absolute top-0 left-0 w-16 h-16 sm:w-20 sm:h-20 border-4 border-transparent border-t-[#a78bfa] rounded-full animate-spin"></div>
       </div>
     </div>
   );
@@ -62,11 +64,13 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <SpaceCursor />
       <ScrollProgress />
       <ScrollToTopButton />
-      <div className="relative bg-[#070C1A] min-h-screen text-white antialiased">
+      <OrbitalPageScroller />
+      <div className="relative bg-[#000000] min-h-screen text-white antialiased">
         {/* Interactive Space Starfield & Constellation Grid */}
-        <SpaceBackground className="fixed inset-0 z-0 opacity-80 pointer-events-none" particleCount={90} enableGrid={true} />
+        <SpaceBackground className="fixed inset-0 z-0 opacity-70 pointer-events-none" particleCount={80} enableGrid={true} />
 
         <div className="relative z-10">
           <Navigation />

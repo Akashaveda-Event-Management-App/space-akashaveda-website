@@ -163,21 +163,18 @@ export default function ServicesSection() {
     },
   ];
 
-  // Track active card on horizontal scroll
-  const handleScroll = () => {
-    if (!scrollContainerRef.current) return;
-    const { scrollLeft, clientWidth } = scrollContainerRef.current;
-    const cardWidth = 380; // approximate card width + gap
-    const index = Math.round(scrollLeft / cardWidth);
-    setActiveIndex(Math.max(0, Math.min(services.length - 1, index)));
-  };
-
   useEffect(() => {
     const el = scrollContainerRef.current;
     if (!el) return;
-    el.addEventListener('scroll', handleScroll, { passive: true });
-    return () => el.removeEventListener('scroll', handleScroll);
-  }, []);
+    const onScroll = () => {
+      const { scrollLeft } = el;
+      const cardWidth = 380;
+      const index = Math.round(scrollLeft / cardWidth);
+      setActiveIndex(Math.max(0, Math.min(services.length - 1, index)));
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, [services.length]);
 
   const scrollToCard = (index: number) => {
     if (scrollContainerRef.current) {
@@ -202,19 +199,18 @@ export default function ServicesSection() {
     <section
       ref={sectionRef as any}
       id="services"
-      className="relative py-16 sm:py-20 bg-[#070C1A] text-white scroll-mt-24 sm:scroll-mt-28 overflow-hidden"
+      className="relative py-16 sm:py-24 bg-[#000000] border-t border-white/10 text-white scroll-mt-24 sm:scroll-mt-28 overflow-hidden"
     >
       <MotionFloatingOrbs />
 
       {/* Background Grid Lines Overlay */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none">
         <motion.div style={{ y: dotMatrixY }} className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.08]" />
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff_0.8px,transparent_0.8px)] [background-size:32px_32px] opacity-[0.03]" />
         </motion.div>
         <motion.div style={{ y: bgGlowY }} className="absolute inset-0 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_30%,rgba(15,23,42,0.45),transparent)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_30%,rgba(124,58,237,0.06),transparent)]" />
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#070C1A] via-transparent to-[#070C1A]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -222,22 +218,22 @@ export default function ServicesSection() {
         {/* ── Section Header ── */}
         <MotionFadeIn direction="up" className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-8 sm:mb-12">
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-full flex-shrink-0" />
-              <p className="text-xs font-mono uppercase tracking-[0.22em] text-blue-400">Our Services</p>
+            <div className="flex items-center gap-2 mb-4">
+              <span className="diamond-tick" />
+              <p className="text-[11px] font-mono uppercase tracking-[0.16em] text-[#A78BFA]">Our Services</p>
             </div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight">
-              BUILT FOR MODERN{' '}
-              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                SPACE<br className="hidden sm:block" /> OPERATIONS
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-tight">
+              Built for Modern{' '}
+              <span className="text-[#A78BFA]">
+                Space Operations
               </span>
             </h2>
           </div>
 
           {/* Carousel Arrows & Counter */}
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center gap-1.5 font-mono text-xs text-[#8A95A3]">
-              <span className="text-white font-bold">{String(activeIndex + 1).padStart(2, '0')}</span>
+            <div className="hidden sm:flex items-center gap-1.5 font-mono text-xs text-[#A3A3AE]">
+              <span className="text-white font-medium">{String(activeIndex + 1).padStart(2, '0')}</span>
               <span>/</span>
               <span>{String(services.length).padStart(2, '0')}</span>
             </div>
@@ -247,10 +243,10 @@ export default function ServicesSection() {
                 onClick={handlePrev}
                 disabled={activeIndex === 0}
                 aria-label="Previous service"
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-white/10 flex items-center justify-center transition-all duration-200 active:scale-95 ${
+                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-[8px] border border-white/10 flex items-center justify-center transition-all duration-200 active:scale-95 ${
                   activeIndex === 0
-                    ? 'opacity-35 cursor-not-allowed bg-white/[0.02] text-[#8A95A3]'
-                    : 'bg-[#080d1a]/90 hover:bg-blue-500/20 hover:border-blue-500/40 text-white shadow-lg'
+                    ? 'opacity-35 cursor-not-allowed bg-white/[0.02] text-[#A3A3AE]'
+                    : 'bg-[#08080A] hover:bg-[#A78BFA]/10 hover:border-[#A78BFA]/40 text-white shadow-sm'
                 }`}
               >
                 <ChevronLeft className="w-5 h-5" />
@@ -259,10 +255,10 @@ export default function ServicesSection() {
                 onClick={handleNext}
                 disabled={activeIndex === services.length - 1}
                 aria-label="Next service"
-                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-xl border border-white/10 flex items-center justify-center transition-all duration-200 active:scale-95 ${
+                className={`w-10 h-10 sm:w-11 sm:h-11 rounded-[8px] border border-white/10 flex items-center justify-center transition-all duration-200 active:scale-95 ${
                   activeIndex === services.length - 1
-                    ? 'opacity-35 cursor-not-allowed bg-white/[0.02] text-[#8A95A3]'
-                    : 'bg-[#080d1a]/90 hover:bg-blue-500/20 hover:border-blue-500/40 text-white shadow-lg'
+                    ? 'opacity-35 cursor-not-allowed bg-white/[0.02] text-[#A3A3AE]'
+                    : 'bg-[#08080A] hover:bg-[#A78BFA]/10 hover:border-[#A78BFA]/40 text-white shadow-sm'
                 }`}
               >
                 <ChevronRight className="w-5 h-5" />
@@ -288,23 +284,23 @@ export default function ServicesSection() {
               return (
                 <motion.div
                   key={i}
-                  whileHover={{ y: -6, transition: { duration: 0.2 } }}
+                  whileHover={{ y: -4, transition: { duration: 0.2 } }}
                   className={`
                     flex-shrink-0 w-[310px] sm:w-[360px] lg:w-[390px] snap-start
-                    rounded-2xl p-6 sm:p-8 flex flex-col justify-between
+                    rounded-[10px] p-6 sm:p-8 flex flex-col justify-between
                     cursor-default relative group overflow-hidden
-                    bg-[#080d1a]/95 backdrop-blur-xl border transition-all duration-300
+                    bg-[#08080A] border transition-all duration-300
                     min-h-[460px] sm:min-h-[490px]
                     ${
                       isCurrent
-                        ? 'border-blue-500/25 shadow-[0_8px_32px_rgba(0,0,0,0.7)]'
-                        : 'border-white/[0.06] hover:border-blue-400/25 hover:bg-[#0b1222] shadow-[0_8px_24px_rgba(0,0,0,0.4)]'
+                        ? 'border-[#A78BFA]/40 shadow-sm'
+                        : 'border-white/10 hover:border-[#A78BFA]/40 hover:bg-[#0B0B0E]'
                     }
                   `}
                 >
-                  {/* Top Subtle Glowing Accent Line */}
+                  {/* Top Subtle Accent Line */}
                   <div
-                    className={`absolute top-0 left-0 h-[2px] bg-gradient-to-r from-blue-500/50 via-cyan-400/40 to-transparent transition-all duration-500 ${
+                    className={`absolute top-0 left-0 h-[2px] bg-[#A78BFA] transition-all duration-500 ${
                       isCurrent ? 'w-full' : 'w-10 group-hover:w-full'
                     }`}
                   />
@@ -312,47 +308,48 @@ export default function ServicesSection() {
                   {/* Card Header: Icon Pod + Category & Stage Pill */}
                   <div className="flex items-center justify-between mb-5">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-xl bg-blue-500/5 border border-blue-500/15 flex items-center justify-center text-blue-400 group-hover:scale-105 group-hover:bg-blue-500/10 group-hover:border-blue-500/25 transition-all duration-300">
+                      <div className="w-10 h-10 rounded-[8px] bg-white/[0.04] border border-white/10 flex items-center justify-center text-[#A78BFA] group-hover:scale-105 group-hover:border-[#A78BFA]/40 transition-all duration-300">
                         <SvcIcon className="w-4.5 h-4.5" />
                       </div>
                       <div>
-                        <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-blue-400/90 block font-semibold">
+                        <span className="text-[10px] font-mono uppercase tracking-[0.16em] text-[#A78BFA] block font-medium">
                           {svc.category}
                         </span>
-                        <span className="text-[10px] font-mono text-[#8A95A3]/80 uppercase tracking-wider">
+                        <span className="text-[10px] font-mono text-[#A3A3AE]/70 uppercase tracking-wider">
                           PHASE {svc.num}
                         </span>
                       </div>
                     </div>
-                    <span className="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-white/[0.02] border border-white/[0.06] text-white/50">
+                    <span className="text-[11px] font-mono font-medium px-2.5 py-0.5 rounded-full bg-white/[0.03] border border-white/10 text-white/50">
                       #{svc.num}
                     </span>
                   </div>
 
                   {/* Middle Content: Title + Accent + Description */}
                   <div className="my-auto py-2">
-                    <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-tight uppercase leading-snug mb-1 group-hover:text-blue-300 transition-colors">
+                    <h3 className="text-lg sm:text-xl font-medium text-white tracking-tight leading-snug mb-1 group-hover:text-[#A78BFA] transition-colors">
                       {svc.title}
                     </h3>
-                    <span className="text-base sm:text-lg font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent uppercase tracking-tight block mb-3">
+                    <span className="text-base sm:text-lg font-medium text-[#A78BFA] tracking-tight block mb-3">
                       {svc.accent}
                     </span>
-                    <p className="text-[#C7CEDA] text-xs sm:text-sm leading-relaxed group-hover:text-white transition-colors">
+                    <p className="text-[#A3A3AE] text-xs sm:text-sm font-light leading-relaxed group-hover:text-white/90 transition-colors">
                       {svc.desc}
                     </p>
                   </div>
 
-                  {/* Key Technical Deliverables Chips (Faded Borders) */}
-                  <div className="pt-4 border-t border-white/[0.05] space-y-2 mt-4">
-                    <div className="text-[10px] font-mono uppercase tracking-widest text-[#8A95A3] mb-1.5">
+                  {/* Key Technical Deliverables Chips */}
+                  <div className="pt-4 border-t border-white/10 space-y-2 mt-4">
+                    <div className="text-[10px] font-mono uppercase tracking-widest text-[#A3A3AE] mb-1.5 flex items-center gap-1.5">
+                      <span className="diamond-tick" />
                       Key Technical Deliverables
                     </div>
                     {svc.deliverables.map((item, dIdx) => (
                       <div
                         key={dIdx}
-                        className="flex items-center gap-2.5 text-[11px] font-mono text-[#C7CEDA] bg-white/[0.015] border border-white/[0.05] hover:border-blue-500/20 hover:bg-white/[0.03] rounded-lg px-3 py-2 transition-colors"
+                        className="flex items-center gap-2.5 text-[11px] font-mono text-[#A3A3AE] bg-white/[0.02] border border-white/8 hover:border-[#A78BFA]/30 hover:text-white rounded-[6px] px-3 py-2 transition-colors"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-blue-400/80 flex-shrink-0" />
+                        <span className="w-1 h-1 rounded-full bg-[#A78BFA] flex-shrink-0" />
                         <span className="truncate">{item}</span>
                       </div>
                     ))}
@@ -372,7 +369,7 @@ export default function ServicesSection() {
               aria-label={`Go to service ${i + 1}`}
               className={`h-1.5 rounded-full transition-all duration-300 ${
                 i === activeIndex
-                  ? 'w-8 bg-blue-400 shadow-[0_0_12px_rgba(59,130,246,0.8)]'
+                  ? 'w-8 bg-[#A78BFA] shadow-[0_0_10px_rgba(167,139,250,0.6)]'
                   : 'w-2 bg-white/20 hover:bg-white/40'
               }`}
             />
@@ -381,12 +378,12 @@ export default function ServicesSection() {
 
         {/* ── Footer Subtext & Direct Action ── */}
         <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 px-1">
-          <p className="text-xs text-[#8A95A3] font-mono">
+          <p className="text-xs text-[#A3A3AE] font-mono">
             SWIPE OR USE ARROWS TO EXPLORE COMPLETE CAPABILITIES
           </p>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            className="group inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-blue-400 hover:text-white transition-colors"
+            className="group inline-flex items-center gap-1.5 text-xs font-mono font-medium text-[#A78BFA] hover:text-white transition-colors"
           >
             CUSTOM MISSION REQUIREMENTS
             <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
