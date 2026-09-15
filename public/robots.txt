@@ -1,0 +1,28 @@
+# Robots.txt for Akashaveda Technologies
+# Website: https://akashaveda.com
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemap Index
+Sitemap: https://akashaveda.com/sitemap.xml
