@@ -13,7 +13,7 @@ export const TelemetryGauge: React.FC<{ value: number; label: string; unit: stri
   const strokeDashoffset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex items-center gap-3 bg-[#0d1527]/90 border border-white/10 rounded-xl p-3 backdrop-blur-md hover:border-cyan-500/30 transition-colors">
+    <div className="flex items-center gap-3 bg-[#121216] border border-white/10 rounded-[8px] p-3 backdrop-blur-md hover:border-[#A78BFA]/30 transition-colors">
       <div className="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 60 60">
           <circle
@@ -39,20 +39,20 @@ export const TelemetryGauge: React.FC<{ value: number; label: string; unit: stri
           />
           <defs>
             <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#38BDF8" />
-              <stop offset="100%" stopColor="#34D399" />
+              <stop offset="0%" stopColor="#A78BFA" />
+              <stop offset="100%" stopColor="#7C3AED" />
             </linearGradient>
           </defs>
         </svg>
         <span className="absolute text-[11px] font-bold font-mono text-white tracking-tight">{value}%</span>
       </div>
       <div className="min-w-0">
-        <div className="text-[9px] font-mono text-gray-400 uppercase tracking-wider truncate mb-0.5">{label}</div>
-        <div className="text-xs font-bold font-mono text-cyan-300 flex items-center gap-1.5">
+        <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-wider truncate mb-0.5">{label}</div>
+        <div className="text-xs font-bold font-mono text-[#A78BFA] flex items-center gap-1.5">
           <span>{value} {unit}</span>
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A78BFA] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A78BFA]" />
           </span>
         </div>
       </div>
@@ -79,14 +79,14 @@ export const MotionTelemetryWaveform: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-[#080d19]/95 border border-white/10 rounded-xl p-3.5 backdrop-blur-md">
+    <div className="bg-[#121216] border border-white/10 rounded-[8px] p-3.5 backdrop-blur-md">
       <div className="flex items-center justify-between text-[10px] font-mono mb-2">
-        <div className="flex items-center gap-1.5 text-cyan-400">
-          <Activity className="w-3.5 h-3.5 animate-pulse text-cyan-400" />
+        <div className="flex items-center gap-1.5 text-[#A78BFA]">
+          <Activity className="w-3.5 h-3.5 animate-pulse text-[#A78BFA]" />
           <span className="font-semibold uppercase tracking-wider">Live Spectrum Demodulator</span>
         </div>
-        <div className="flex items-center gap-2 text-gray-400">
-          <span className="text-gray-400">8.42 GHz</span>
+        <div className="flex items-center gap-2 text-[#71717A]">
+          <span>8.42 GHz</span>
           <span className="text-emerald-400 font-semibold px-1.5 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">
             SNR 28.4 dB
           </span>
@@ -94,7 +94,7 @@ export const MotionTelemetryWaveform: React.FC = () => {
       </div>
 
       {/* Spectrum Wave Bars */}
-      <div className="h-16 flex items-end gap-[3px] py-1 bg-black/30 rounded-lg px-2 border border-white/5">
+      <div className="h-16 flex items-end gap-[3px] py-1 bg-black/30 rounded-[6px] px-2 border border-white/5">
         {bars.map((height, i) => (
           <motion.div
             key={i}
@@ -102,18 +102,18 @@ export const MotionTelemetryWaveform: React.FC = () => {
             transition={{ type: 'spring', stiffness: 350, damping: 20 }}
             className={`flex-1 rounded-t-sm ${
               i % 4 === 0
-                ? 'bg-gradient-to-t from-cyan-600 via-cyan-400 to-emerald-300 shadow-[0_0_8px_rgba(6,182,212,0.5)]'
+                ? 'bg-gradient-to-t from-[#7C3AED] via-[#A78BFA] to-white shadow-[0_0_8px_rgba(124,58,237,0.5)]'
                 : i % 2 === 0
-                ? 'bg-gradient-to-t from-blue-600 via-blue-400 to-cyan-400'
-                : 'bg-gradient-to-t from-blue-700/80 via-blue-500/80 to-cyan-300/80'
+                ? 'bg-gradient-to-t from-[#5B21B6] via-[#7C3AED] to-[#A78BFA]'
+                : 'bg-gradient-to-t from-[#4C1D95]/80 via-[#6D28D9]/80 to-[#8B5CF6]/80'
             }`}
           />
         ))}
       </div>
 
-      <div className="flex justify-between items-center text-[9px] font-mono text-gray-400 pt-2 mt-1 border-t border-white/5">
+      <div className="flex justify-between items-center text-[9px] font-mono text-[#71717A] pt-2 mt-1 border-t border-white/5">
         <span>BW: 150 MHz · CCSDS TM</span>
-        <span className="text-cyan-400 font-medium">STREAM: 60 FPS REAL-TIME</span>
+        <span className="text-[#A78BFA] font-medium">STREAM: 60 FPS REAL-TIME</span>
       </div>
     </div>
   );
@@ -135,26 +135,26 @@ export const AutonomyTimeline: React.FC = () => {
       status: 'COMPLETED',
       detail: '1.4 GB transferred',
       time: '2m ago',
-      iconClass: 'text-blue-400',
-      badgeClass: 'bg-blue-500/10 border-blue-500/30 text-blue-300',
+      iconClass: 'text-[#A78BFA]',
+      badgeClass: 'bg-[#7C3AED]/15 border-[#7C3AED]/30 text-[#A78BFA]',
     },
     {
       name: 'Orbit Debris Maneuver',
       status: 'VERIFIED',
       detail: 'Probability < 0.0001%',
       time: 'Standby',
-      iconClass: 'text-cyan-400',
-      badgeClass: 'bg-cyan-500/10 border-cyan-500/30 text-cyan-300',
+      iconClass: 'text-[#C4B5FD]',
+      badgeClass: 'bg-[#8B5CF6]/15 border-[#8B5CF6]/30 text-[#C4B5FD]',
     },
   ];
 
   return (
     <div className="space-y-2">
-      <div className="flex justify-between items-center px-3 py-2 bg-[#0d1527]/90 border border-white/10 rounded-xl text-[10px] font-mono">
+      <div className="flex justify-between items-center px-3 py-2 bg-[#121216] border border-white/10 rounded-[8px] text-[10px] font-mono">
         <span className="text-gray-300 flex items-center gap-1.5">
-          <Clock className="w-3.5 h-3.5 text-blue-400" /> Next Pass Countdown
+          <Clock className="w-3.5 h-3.5 text-[#A78BFA]" /> Next Pass Countdown
         </span>
-        <span className="text-cyan-300 font-bold tracking-wider">12m 44s (GS-HYD-01)</span>
+        <span className="text-[#A78BFA] font-bold tracking-wider">12m 44s (GS-HYD-01)</span>
       </div>
 
       <div className="space-y-2">
@@ -164,7 +164,7 @@ export const AutonomyTimeline: React.FC = () => {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: idx * 0.08, duration: 0.3 }}
-            className="flex items-center justify-between p-2.5 bg-[#090e1b]/90 border border-white/8 rounded-xl text-[11px] font-mono hover:border-blue-400/40 transition-colors"
+            className="flex items-center justify-between p-2.5 bg-[#08080A] border border-white/10 rounded-[8px] text-[11px] font-mono hover:border-[#A78BFA]/40 transition-colors"
           >
             <div className="flex items-center gap-2.5">
               <CheckCircle2 className={`w-4 h-4 ${step.iconClass} flex-shrink-0`} />
@@ -188,28 +188,28 @@ export const AnalyticsGrid: React.FC = () => {
   const metrics = [
     { label: 'Power Efficiency', val: '99.4%', status: 'NOMINAL', color: 'text-white' },
     { label: 'Thermal Balance', val: '+21.4 °C', status: 'OPTIMAL', color: 'text-emerald-400' },
-    { label: 'Uptime Reliability', val: '99.98%', status: 'SLO PASSED', color: 'text-cyan-400' },
-    { label: 'Downlink Speed', val: '1.2 Gbps', status: 'HIGH SPEED', color: 'text-blue-400' },
+    { label: 'Uptime Reliability', val: '99.98%', status: 'SLO PASSED', color: 'text-[#A78BFA]' },
+    { label: 'Downlink Speed', val: '1.2 Gbps', status: 'HIGH SPEED', color: 'text-[#C4B5FD]' },
   ];
 
   return (
     <div className="space-y-2.5">
-      <div className="bg-gradient-to-r from-blue-900/40 via-cyan-900/30 to-blue-950/40 border border-blue-500/25 rounded-xl p-3 flex items-center justify-between">
+      <div className="bg-[#121216] border border-white/10 rounded-[8px] p-3 flex items-center justify-between">
         <div>
-          <div className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">Predictive Health Index</div>
+          <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-widest">Predictive Health Index</div>
           <div className="text-sm font-bold text-white font-mono flex items-center gap-1.5 mt-0.5">
-            Zero-Failure Lifecycle: <span className="text-cyan-300 font-extrabold">7.4 Years</span>
+            Zero-Failure Lifecycle: <span className="text-[#A78BFA] font-extrabold">7.4 Years</span>
           </div>
         </div>
-        <div className="px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-[10px] font-mono font-bold">
+        <div className="px-2.5 py-1 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 text-[#A78BFA] text-[10px] font-mono font-bold">
           HEALTH: 99.8%
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
         {metrics.map((m) => (
-          <div key={m.label} className="bg-[#090e1b]/90 border border-white/8 rounded-xl p-2.5 hover:border-white/20 transition-colors">
-            <div className="text-[9px] font-mono text-gray-400 uppercase tracking-widest">{m.label}</div>
+          <div key={m.label} className="bg-[#08080A] border border-white/10 rounded-[8px] p-2.5 hover:border-[#A78BFA]/30 transition-colors">
+            <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-widest">{m.label}</div>
             <div className={`text-sm font-bold font-mono ${m.color} mt-0.5`}>{m.val}</div>
             <div className="text-[9px] font-mono text-gray-500 mt-0.5">{m.status}</div>
           </div>
