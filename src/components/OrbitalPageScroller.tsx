@@ -70,7 +70,7 @@ export default function OrbitalPageScroller() {
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           title={isExpanded ? 'Minimize Scroller' : 'Expand Scroller'}
-          className="w-7 h-7 rounded-full bg-[#121216] border border-white/10 flex items-center justify-center text-[#A3A3AE] hover:text-[#A78BFA] hover:border-[#A78BFA]/40 transition-colors mb-3"
+          className="w-7 h-7 rounded-full bg-[#121216] border border-white/10 flex items-center justify-center text-[#A3A3AE] hover:text-[#47B2E4] hover:border-[#47B2E4]/40 transition-colors mb-3"
         >
           <Compass className={`w-3.5 h-3.5 transition-transform duration-300 ${isExpanded ? 'rotate-0' : 'rotate-180'}`} />
         </button>
@@ -94,7 +94,7 @@ export default function OrbitalPageScroller() {
               {/* Vertical Track Line */}
               <div className="absolute top-0 bottom-0 w-[2px] bg-white/10 rounded-full overflow-hidden">
                 <motion.div
-                  className="w-full bg-gradient-to-b from-[#7C3AED] via-[#A78BFA] to-[#C4B5FD] rounded-full"
+                  className="w-full bg-gradient-to-b from-[#2381AE] via-[#47B2E4] to-[#7CCCED] rounded-full"
                   style={{ height: `${scrollPercent}%` }}
                   transition={{ ease: 'easeOut', duration: 0.15 }}
                 />
@@ -118,14 +118,14 @@ export default function OrbitalPageScroller() {
                       aria-label={`Jump to ${phase.name}`}
                       className={`relative z-10 w-3 h-3 rounded-full transition-all duration-300 flex items-center justify-center ${
                         isActive
-                          ? 'bg-[#A78BFA] scale-125 shadow-[0_0_12px_#7C3AED] border-2 border-black'
-                          : 'bg-[#121216] border border-white/30 hover:border-[#A78BFA] hover:scale-110'
+                          ? 'bg-[#47B2E4] scale-125 shadow-[0_0_12px_#2381AE] border-2 border-black'
+                          : 'bg-[#121216] border border-white/30 hover:border-[#47B2E4] hover:scale-110'
                       }`}
                     >
                       {isActive && (
                         <motion.span
                           layoutId="orbitalPipRing"
-                          className="absolute -inset-1 rounded-full border border-[#A78BFA] animate-ping opacity-60 pointer-events-none"
+                          className="absolute -inset-1 rounded-full border border-[#47B2E4] animate-ping opacity-60 pointer-events-none"
                           transition={{ duration: 1.5, repeat: Infinity }}
                         />
                       )}
@@ -141,13 +141,13 @@ export default function OrbitalPageScroller() {
                           transition={{ duration: 0.18 }}
                           className="absolute right-7 py-1.5 px-3 rounded-md bg-[#08080A]/95 border border-white/15 backdrop-blur-xl shadow-2xl flex items-center gap-2.5 whitespace-nowrap z-50 pointer-events-none"
                         >
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#7C3AED]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#47B2E4]" />
                           <div className="flex flex-col text-left">
                             <div className="flex items-center gap-1.5">
                               <span className="text-[10px] font-mono font-bold text-white tracking-wider">
                                 {phase.label}
                               </span>
-                              <span className="text-[8px] font-mono text-[#A78BFA] bg-[#A78BFA]/10 border border-[#A78BFA]/20 px-1 rounded">
+                              <span className="text-[8px] font-mono text-[#47B2E4] bg-[#47B2E4]/10 border border-[#47B2E4]/20 px-1 rounded">
                                 {phase.badge}
                               </span>
                             </div>
@@ -180,7 +180,7 @@ export default function OrbitalPageScroller() {
               <span className="text-[8px] font-mono uppercase tracking-widest text-[#71717A]">
                 ALT
               </span>
-              <span className="text-[10px] font-mono font-bold text-[#A78BFA]">
+              <span className="text-[10px] font-mono font-bold text-[#47B2E4]">
                 {activeAlt.replace(' KM', '')}
                 <span className="text-[7px] text-[#71717A] ml-0.5">K</span>
               </span>

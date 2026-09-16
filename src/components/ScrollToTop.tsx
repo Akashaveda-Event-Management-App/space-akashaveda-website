@@ -22,15 +22,15 @@ export default function ScrollToTop() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.7, y: 16 }}
           transition={{ type: 'spring', stiffness: 400, damping: 28 }}
-          whileHover={{ scale: 1.08, boxShadow: '0 0 20px rgba(124,58,237,0.45)' }}
+          whileHover={{ scale: 1.08, boxShadow: '0 0 20px rgba(71,178,228,0.45)' }}
           whileTap={{ scale: 0.92 }}
           className="fixed bottom-6 right-6 z-50 w-11 h-11 rounded-full
-                     bg-[#08080A] border border-white/20 text-[#A78BFA] hover:border-[#A78BFA]
+                     bg-[#08080A] border border-white/20 text-[#47B2E4] hover:border-[#47B2E4]
                      flex items-center justify-center transition-colors shadow-lg"
         >
           {/* Outer pulse ring */}
           <span
-            className="absolute inset-[-3px] rounded-full border border-[#A78BFA]/25 animate-ping"
+            className="absolute inset-[-3px] rounded-full border border-[#47B2E4]/25 animate-ping"
             style={{ animationDuration: '2.4s' }}
           />
 
@@ -45,7 +45,7 @@ export default function ScrollToTop() {
               cx="24"
               cy="24"
               r="21"
-              stroke="rgba(167,139,250,0.5)"
+              stroke="rgba(71,178,228,0.5)"
               strokeWidth="1.5"
               strokeDasharray="32 132"
               strokeLinecap="round"

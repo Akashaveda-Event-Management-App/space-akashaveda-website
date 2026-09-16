@@ -1,93 +1,35 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Activity,
   Globe,
-  ShieldAlert,
   Zap,
   Clock,
-  Flame,
-  CheckCircle2,
+  ChevronDown,
+  ShieldCheck,
+  Radio,
+  Video,
+  Compass,
+  Cpu,
+  Activity,
+  Crosshair
 } from 'lucide-react';
-import {
-  TelemetryGauge,
-  MotionTelemetryWaveform,
-} from './HeroMotionGraphics';
 import { EarthOrbitCanvas } from './EarthOrbitCanvas';
 
-export type HeroCardType = 'telemetry' | 'orbit' | 'ssa';
-
-interface HeroCardProps {
-  pulse: number;
+export interface HeroCardProps {
+  pulse?: number;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   CARD 1: CONSTELLATION FLIGHT TELEMETRY (Clean, spacious, zero clutter)
+   CONCISE HERO MISSION CARD (High-End Aerospace Widget)
+   Features live satellite video stream, 3D orbit toggle,
+   clean telemetry metrics, and smooth hover subsystem disclosure.
    ══════════════════════════════════════════════════════════════════ */
-export function TacticalHudCard({ pulse }: HeroCardProps) {
-  return (
-    <div className="p-4 sm:p-5 space-y-3.5">
-      {/* 1. Primary Metrics Row */}
-      <div className="grid grid-cols-2 gap-3">
-        <TelemetryGauge value={pulse} label="Signal Strength" unit="%" />
-
-        <div className="bg-[#121216] border border-white/10 rounded-[10px] p-3.5 backdrop-blur-md flex flex-col justify-center hover:border-[#A78BFA]/30 transition-colors">
-          <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-wider mb-1">
-            Orbital Velocity
-          </div>
-          <div className="text-sm font-bold font-mono text-[#A78BFA] flex items-center gap-1.5">
-            <Globe className="w-4 h-4 text-[#A78BFA]" />
-            7.66 km/s
-          </div>
-          <div className="text-[10px] font-mono text-[#A3A3AE] mt-1 flex items-center gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            540 KM Circular LEO
-          </div>
-        </div>
-      </div>
-
-      {/* 2. Live Spectrum Demodulator Waveform */}
-      <MotionTelemetryWaveform />
-
-      {/* 3. Pass Autonomy Pipeline Progress Bar */}
-      <div className="bg-[#121216] border border-white/10 rounded-[10px] p-3 space-y-2">
-        <div className="flex items-center justify-between text-[10px] font-mono">
-          <span className="text-[#A3A3AE] flex items-center gap-1.5">
-            <Zap className="w-3.5 h-3.5 text-[#A78BFA]" />
-            Pass Autonomy: <strong className="text-white">AOS Sequence</strong>
-          </span>
-          <span className="text-emerald-400 font-bold flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3" /> 100% EXECUTED
-          </span>
-        </div>
-        <div className="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
-          <motion.div
-            initial={{ width: '0%' }}
-            animate={{ width: '100%' }}
-            transition={{ duration: 1.2, ease: 'easeOut' }}
-            className="h-full bg-gradient-to-r from-[#7C3AED] via-[#A78BFA] to-emerald-400 rounded-full shadow-[0_0_10px_rgba(124,58,237,0.5)]"
-          />
-        </div>
-      </div>
-
-      {/* 4. AI Subsystem Risk Status */}
-      <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#121216] border border-white/10 rounded-[10px] text-[11px] font-mono">
-        <span className="text-[#A3A3AE] flex items-center gap-1.5">
-          <ShieldAlert className="w-3.5 h-3.5 text-emerald-400" />
-          AI Risk Index: <strong className="text-emerald-400">0.02% (Nominal)</strong>
-        </span>
-        <span className="text-[#C4B5FD] text-[10px] font-semibold">VYUH Core Active</span>
-      </div>
-    </div>
-  );
-}
-
-/* ══════════════════════════════════════════════════════════════════
-   CARD 2: 3D ORBITAL TRAJECTORY & GROUND PASS SIMULATOR
-   ══════════════════════════════════════════════════════════════════ */
-export function OrbitSimCard() {
+export function HeroConciseCard({ pulse = 99.8 }: HeroCardProps) {
   const [countdown, setCountdown] = useState(258);
+  const [isHovered, setIsHovered] = useState(false);
+  const [viewMode, setViewMode] = useState<'video' | 'orbit'>('video');
 
+  // Simulated Pass Countdown
   useEffect(() => {
     const timer = setInterval(() => {
       setCountdown((c) => (c > 0 ? c - 1 : 360));
@@ -98,136 +40,226 @@ export function OrbitSimCard() {
   const formatCountdown = (secs: number) => {
     const m = Math.floor(secs / 60);
     const s = secs % 60;
-    return `T-${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
+    return `T-${String(m).padStart(2, '0')}M ${String(s).padStart(2, '0')}S`;
   };
 
   return (
-    <div className="p-4 sm:p-5 space-y-3.5">
-      {/* 3D Earth Globe Visualizer */}
-      <div className="relative h-44 w-full bg-gradient-to-b from-[#0B0B0E] to-[#000000] border border-white/10 rounded-[10px] overflow-hidden flex items-center justify-center">
-        <EarthOrbitCanvas height="176px" />
-        
-        {/* Orbital HUD Overlay tags */}
-        <div className="absolute top-2.5 left-3 pointer-events-none">
-          <div className="text-[9px] font-mono uppercase text-[#71717A]">Orbit Inclination</div>
-          <div className="text-xs font-mono font-bold text-white">51.64° / 142.8° RAAN</div>
-        </div>
-
-        <div className="absolute top-2.5 right-3 pointer-events-none text-right">
-          <div className="text-[9px] font-mono uppercase text-[#71717A]">Next Zenith Pass</div>
-          <div className="text-xs font-mono font-bold text-[#A78BFA]">{formatCountdown(countdown)}</div>
-        </div>
-
-        <div className="absolute bottom-2 inset-x-3 pointer-events-none flex items-center justify-between text-[9px] font-mono text-[#A3A3AE] bg-black/70 px-2.5 py-1 rounded backdrop-blur-sm border border-white/10">
-          <span>SSP: 12.97°N, 77.59°E</span>
-          <span className="text-[#C4B5FD]">ALT: 540.2 KM · EL: 74°</span>
-        </div>
-      </div>
-
-      {/* Doppler & RF Link Telemetry Rows */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="p-3 bg-[#121216] border border-white/10 rounded-[10px]">
-          <div className="text-[9px] font-mono uppercase text-[#71717A] mb-1">Doppler Shift (X-Band)</div>
-          <div className="text-xs font-mono font-bold text-[#A78BFA] flex items-center gap-1.5">
-            <Activity className="w-3.5 h-3.5 text-[#A78BFA]" />
-            +14.28 kHz
+    <div
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="p-5 sm:p-6 flex flex-col gap-5 group cursor-default"
+    >
+      {/* ── 1. Header Bar: Identity & Sleek Mode Toggle ── */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2.5">
+          <span className="relative flex h-2.5 w-2.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60" />
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_8px_#34D399]" />
+          </span>
+          <div>
+            <div className="text-white font-bold tracking-wider text-xs uppercase font-display">
+              VYUH C2 CORE
+            </div>
+            <div className="text-[9px] font-mono text-[#47B2E4] uppercase tracking-widest">
+              540 KM LEO
+            </div>
           </div>
-          <div className="text-[9px] font-mono text-[#A3A3AE] mt-1">Carrier: 8.420 GHz</div>
         </div>
 
-        <div className="p-3 bg-[#121216] border border-white/10 rounded-[10px]">
-          <div className="text-[9px] font-mono uppercase text-[#71717A] mb-1">Pass Duration</div>
-          <div className="text-xs font-mono font-bold text-white flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-white/70" />
-            09m 44s Window
-          </div>
-          <div className="text-[9px] font-mono text-emerald-400 mt-1">GS-BLR-PRIMARY</div>
+        {/* Glassmorphism Segmented Toggle */}
+        <div className="flex items-center p-1 rounded-full bg-white/[0.03] border border-white/10 backdrop-blur-md shadow-inner">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setViewMode('video');
+            }}
+            className={`px-3 py-1.5 rounded-full text-[10px] font-mono transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+              viewMode === 'video'
+                ? 'bg-gradient-to-r from-[#2381AE] to-[#47B2E4] text-white font-semibold shadow-[0_0_12px_rgba(71,178,228,0.5)]'
+                : 'text-[#6B7785] hover:text-white'
+            }`}
+          >
+            <Video className="w-3 h-3" />
+            <span className="hidden xs:inline">OPTICAL</span>
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              setViewMode('orbit');
+            }}
+            className={`px-3 py-1.5 rounded-full text-[10px] font-mono transition-all duration-300 flex items-center gap-1.5 cursor-pointer ${
+              viewMode === 'orbit'
+                ? 'bg-gradient-to-r from-[#2381AE] to-[#47B2E4] text-white font-semibold shadow-[0_0_12px_rgba(71,178,228,0.5)]'
+                : 'text-[#6B7785] hover:text-white'
+            }`}
+          >
+            <Compass className="w-3 h-3" />
+            <span className="hidden xs:inline">ORBIT 3D</span>
+          </button>
         </div>
       </div>
 
-      <div className="flex items-center justify-between px-3.5 py-2.5 bg-[#121216] border border-white/10 rounded-[10px] text-[10px] font-mono">
-        <span className="text-[#A3A3AE]">Antenna Tracking Vector:</span>
-        <span className="text-[#C4B5FD] font-semibold">AZ 218.4° / EL 42.1°</span>
+      {/* ── 2. Visual Centerpiece: Optical Feed or 3D Orbit ── */}
+      <div className="relative h-40 sm:h-48 w-full bg-[#030508] border border-white/10 rounded-xl overflow-hidden shadow-[0_0_30px_rgba(71,178,228,0.05)] group/screen">
+        {viewMode === 'video' ? (
+          <>
+            {/* Live Satellite Video */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover scale-105 group-hover/screen:scale-110 transition-transform duration-1000 ease-out opacity-90"
+              src="/bg3.mp4"
+            />
+            {/* Cinematic Gradient Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 pointer-events-none" />
+            
+            {/* Tactical HUD Corner Markers */}
+            <Crosshair className="absolute top-2 left-2 w-3 h-3 text-[#47B2E4]/70 pointer-events-none" />
+            <Crosshair className="absolute top-2 right-2 w-3 h-3 text-[#47B2E4]/70 pointer-events-none" />
+            
+            {/* Top HUD Stats */}
+            <div className="absolute top-3 left-7 pointer-events-none flex flex-col gap-0.5">
+              <div className="text-[9px] font-mono uppercase text-[#47B2E4] font-semibold tracking-widest">
+                OPTICAL TRACKING
+              </div>
+              <div className="text-[10px] font-mono text-white/90">AURORA-7</div>
+            </div>
+
+            <div className="absolute top-3 right-7 pointer-events-none text-right flex flex-col gap-0.5">
+              <div className="text-[9px] font-mono uppercase text-[#6B7785] tracking-widest">
+                NEXT PASS
+              </div>
+              <div className="text-[10px] font-mono font-bold text-[#7CCCED] flex items-center justify-end gap-1">
+                <Clock className="w-3 h-3 text-[#47B2E4]" />
+                {formatCountdown(countdown)}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* 3D Earth Orbit Canvas */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-90">
+              <EarthOrbitCanvas height="100%" />
+            </div>
+            
+            <div className="absolute top-3 left-4 pointer-events-none">
+              <div className="text-[9px] font-mono uppercase text-[#6B7785] tracking-widest">INCLINATION</div>
+              <div className="text-xs font-mono font-bold text-white">51.64° LEO</div>
+            </div>
+          </>
+        )}
+
+        {/* Universal Bottom Lock Bar */}
+        <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-[9px] font-mono text-[#94A3B8] bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10">
+          <span className="flex items-center gap-1.5">
+            <Radio className="w-3 h-3 text-[#47B2E4]" />
+            GS-BLR · 82° EL
+          </span>
+          <span className="text-emerald-400 font-semibold flex items-center gap-1.5 tracking-widest">
+            <ShieldCheck className="w-3 h-3" />
+            AOS LOCKED
+          </span>
+        </div>
       </div>
-    </div>
-  );
-}
 
-/* ══════════════════════════════════════════════════════════════════
-   CARD 3: CHAKRA-SSA CONJUNCTION RISK & COLLISION AVOIDANCE
-   ══════════════════════════════════════════════════════════════════ */
-export function ChakraSsaCard() {
-  return (
-    <div className="p-4 sm:p-5 space-y-3.5">
-      {/* Tactical Radar Display with Proximity Intercept */}
-      <div className="relative h-40 bg-[#0B0B0E] rounded-[10px] border border-white/10 p-3 overflow-hidden flex items-center justify-center">
-        {/* Concentric proximity circles */}
-        <div className="absolute w-32 h-32 rounded-full border border-white/10 pointer-events-none" />
-        <div className="absolute w-24 h-24 rounded-full border border-amber-500/20 pointer-events-none" />
-        <div className="absolute w-14 h-14 rounded-full border border-rose-500/30 pointer-events-none animate-pulse" />
-        
-        {/* Crosshairs */}
-        <div className="absolute inset-x-4 h-[1px] bg-white/10 pointer-events-none" />
-        <div className="absolute inset-y-2 w-[1px] bg-white/10 pointer-events-none" />
-
-        {/* Primary Asset Node */}
-        <div className="relative z-10 flex flex-col items-center">
-          <div className="w-3.5 h-3.5 rounded-full bg-[#A78BFA] border-2 border-black shadow-[0_0_10px_#7C3AED]" />
-          <span className="text-[8px] font-mono text-[#A78BFA] mt-1 font-bold">VYUH-MCS-01</span>
+      {/* ── 3. Clean, Borderless Metrics Row ── */}
+      <div className="grid grid-cols-3 gap-2">
+        <div className="flex flex-col items-center justify-center border-r border-white/10">
+          <span className="text-[9px] font-mono text-[#6B7785] uppercase tracking-widest mb-1">Orbital Vel</span>
+          <span className="text-sm sm:text-base font-bold font-mono text-white flex items-center gap-1">
+            <Globe className="w-3.5 h-3.5 text-[#47B2E4]" />
+            7.66<span className="text-[10px] text-[#47B2E4] font-normal">km/s</span>
+          </span>
         </div>
 
-        {/* Incoming Conjunction Target Node */}
-        <motion.div
-          animate={{ x: [36, 32, 36], y: [-24, -20, -24] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute z-10 flex flex-col items-center"
+        <div className="flex flex-col items-center justify-center border-r border-white/10">
+          <span className="text-[9px] font-mono text-[#6B7785] uppercase tracking-widest mb-1">Telemetry</span>
+          <span className="text-sm sm:text-base font-bold font-mono text-white flex items-center gap-1">
+            <Zap className="w-3.5 h-3.5 text-emerald-400" />
+            &lt;10<span className="text-[10px] text-emerald-400 font-normal">ms</span>
+          </span>
+        </div>
+
+        <div className="flex flex-col items-center justify-center">
+          <span className="text-[9px] font-mono text-[#6B7785] uppercase tracking-widest mb-1">Health Idx</span>
+          <span className="text-sm sm:text-base font-bold font-mono text-white flex items-center gap-1">
+            <Activity className="w-3.5 h-3.5 text-[#7CCCED]" />
+            {pulse}<span className="text-[10px] text-[#7CCCED] font-normal">%</span>
+          </span>
+        </div>
+      </div>
+
+      {/* ── 4. Glowing Pass Autonomy Strip ── */}
+      <div className="space-y-2 pt-2">
+        <div className="flex items-center justify-between text-[9px] font-mono uppercase tracking-widest">
+          <span className="text-[#94A3B8]">Pass Autonomy Status</span>
+          <span className="text-emerald-400 font-semibold">100% Nominal</span>
+        </div>
+        <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden relative">
+          <motion.div 
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#2381AE] via-[#47B2E4] to-emerald-400 w-full"
+            initial={{ scaleX: 0.8, transformOrigin: 'left' }}
+            animate={{ scaleX: [0.8, 1, 0.8] }}
+            transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        </div>
+      </div>
+
+      {/* ── 5. Seamless Hover-Revealed Drawer ── */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="overflow-hidden"
+          >
+            <div className="pt-5 mt-2 border-t border-white/10">
+              <div className="flex items-center justify-between mb-3 text-[9px] font-mono uppercase tracking-widest">
+                <span className="text-[#7CCCED] font-semibold flex items-center gap-1.5">
+                  <Cpu className="w-3 h-3 text-[#47B2E4]" />
+                  Subsystem Bus Telemetry
+                </span>
+                <span className="text-[#6B7785]">XTCE Verified</span>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-y-3 gap-x-4 text-[10px] font-mono">
+                <div className="flex justify-between items-center bg-white/[0.02] p-2 rounded">
+                  <span className="text-[#94A3B8]">EPS Bus</span>
+                  <span className="text-white font-semibold">28.4 V</span>
+                </div>
+                <div className="flex justify-between items-center bg-white/[0.02] p-2 rounded">
+                  <span className="text-[#94A3B8]">Batt Temp</span>
+                  <span className="text-emerald-400 font-semibold">+18.2°C</span>
+                </div>
+                <div className="flex justify-between items-center bg-white/[0.02] p-2 rounded">
+                  <span className="text-[#94A3B8]">RW Speed</span>
+                  <span className="text-white font-semibold">4,120 RPM</span>
+                </div>
+                <div className="flex justify-between items-center bg-white/[0.02] p-2 rounded">
+                  <span className="text-[#94A3B8]">ADCS Drift</span>
+                  <span className="text-emerald-400 font-semibold">&lt;0.002°</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Hover Hint */}
+      {!isHovered && (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-center text-[9px] font-mono text-[#64748B] pt-2 flex items-center justify-center gap-1.5"
         >
-          <div className="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.8)] animate-ping" />
-          <div className="w-2.5 h-2.5 rounded-full bg-rose-500 -mt-2.5" />
-          <span className="text-[8px] font-mono text-rose-400 mt-1 bg-black/80 px-1 rounded border border-rose-500/30">
-            COSMOS-1408 DEBRIS
-          </span>
+          <span>Hover for subsystem diagnostics</span>
+          <ChevronDown className="w-3 h-3 text-[#47B2E4] animate-bounce" />
         </motion.div>
-
-        <div className="absolute top-2 left-2.5 text-[9px] font-mono text-amber-300 font-semibold bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded">
-          MISS DISTANCE: 1.18 KM
-        </div>
-        <div className="absolute bottom-2 left-2.5 text-[8px] font-mono text-[#71717A]">
-          TCA: 18m 42s
-        </div>
-        <div className="absolute bottom-2 right-2.5 text-[8px] font-mono text-amber-400 font-bold">
-          P(c) = 1.42e-05
-        </div>
-      </div>
-
-      {/* Autonomous Maneuver Planner Details */}
-      <div className="bg-[#121216] border border-white/10 rounded-[10px] p-3 space-y-2">
-        <div className="flex items-center justify-between text-[10px] font-mono">
-          <span className="text-[#A3A3AE] flex items-center gap-1.5">
-            <Flame className="w-3.5 h-3.5 text-amber-400" />
-            Autonomous Avoidance Maneuver (CAM)
-          </span>
-          <span className="text-emerald-400 font-semibold flex items-center gap-1">
-            <CheckCircle2 className="w-3 h-3" /> ARMED
-          </span>
-        </div>
-
-        <div className="grid grid-cols-2 gap-2 text-[10px] font-mono pt-1.5 border-t border-white/5">
-          <div>
-            <span className="text-[#71717A] text-[9px] block">DELTA-V VECTOR</span>
-            <span className="text-white font-bold">+0.42 m/s Prograde</span>
-          </div>
-          <div>
-            <span className="text-[#71717A] text-[9px] block">THRUSTER DURATION</span>
-            <span className="text-[#C4B5FD] font-bold">12.0s Cold Gas</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between px-3.5 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-[10px] text-[10px] font-mono text-emerald-300">
-        <span>AI Trajectory Safety Factor:</span>
-        <span className="font-bold">100% POST-BURN CLEARANCE</span>
-      </div>
+      )}
     </div>
   );
 }
