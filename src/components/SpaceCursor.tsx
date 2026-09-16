@@ -124,25 +124,25 @@ export default function SpaceCursor() {
           {/* Top-Left */}
           <span
             className={`absolute top-0 left-0 w-2.5 h-2.5 border-t-[1.5px] border-l-[1.5px] transition-colors duration-200 ${
-              isHovered ? 'border-[#C4B5FD]' : 'border-[#A78BFA]'
+              isHovered ? 'border-[#7CCCED]' : 'border-[#47B2E4]'
             }`}
           />
           {/* Top-Right */}
           <span
             className={`absolute top-0 right-0 w-2.5 h-2.5 border-t-[1.5px] border-r-[1.5px] transition-colors duration-200 ${
-              isHovered ? 'border-[#C4B5FD]' : 'border-[#A78BFA]'
+              isHovered ? 'border-[#7CCCED]' : 'border-[#47B2E4]'
             }`}
           />
           {/* Bottom-Left */}
           <span
             className={`absolute bottom-0 left-0 w-2.5 h-2.5 border-b-[1.5px] border-l-[1.5px] transition-colors duration-200 ${
-              isHovered ? 'border-[#C4B5FD]' : 'border-[#A78BFA]'
+              isHovered ? 'border-[#7CCCED]' : 'border-[#47B2E4]'
             }`}
           />
           {/* Bottom-Right */}
           <span
             className={`absolute bottom-0 right-0 w-2.5 h-2.5 border-b-[1.5px] border-r-[1.5px] transition-colors duration-200 ${
-              isHovered ? 'border-[#C4B5FD]' : 'border-[#A78BFA]'
+              isHovered ? 'border-[#7CCCED]' : 'border-[#47B2E4]'
             }`}
           />
 
@@ -158,7 +158,7 @@ export default function SpaceCursor() {
               cy="20"
               r="17"
               fill="none"
-              stroke={isHovered ? '#A78BFA' : '#7C3AED'}
+              stroke={isHovered ? '#47B2E4' : '#2381AE'}
               strokeWidth="1"
               strokeDasharray="4 6"
             />
@@ -167,10 +167,10 @@ export default function SpaceCursor() {
           {/* Crosshair micro tick marks on hover */}
           {isHovered && (
             <>
-              <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-[1px] h-2 bg-[#C4B5FD]" />
-              <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-[1px] h-2 bg-[#C4B5FD]" />
-              <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-[1px] w-2 bg-[#C4B5FD]" />
-              <span className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-[1px] w-2 bg-[#C4B5FD]" />
+              <span className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-[1px] h-2 bg-[#7CCCED]" />
+              <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-[1px] h-2 bg-[#7CCCED]" />
+              <span className="absolute -left-1.5 top-1/2 -translate-y-1/2 h-[1px] w-2 bg-[#7CCCED]" />
+              <span className="absolute -right-1.5 top-1/2 -translate-y-1/2 h-[1px] w-2 bg-[#7CCCED]" />
             </>
           )}
 
@@ -180,7 +180,7 @@ export default function SpaceCursor() {
               initial={{ scale: 0.6, opacity: 0.9 }}
               animate={{ scale: 2.6, opacity: 0 }}
               transition={{ duration: 0.45, ease: 'easeOut' }}
-              className="absolute inset-0 rounded-full border border-[#C4B5FD] bg-[#7C3AED]/25"
+              className="absolute inset-0 rounded-full border border-[#7CCCED] bg-[#47B2E4]/25"
             />
           )}
         </motion.div>
@@ -200,10 +200,10 @@ export default function SpaceCursor() {
         <motion.div
           animate={{
             scale: isClicking ? 0.6 : isHovered ? 1.4 : 1,
-            backgroundColor: isHovered ? '#FFFFFF' : '#A78BFA',
+            backgroundColor: isHovered ? '#FFFFFF' : '#47B2E4',
           }}
           transition={{ duration: 0.15 }}
-          className="w-1.5 h-1.5 rounded-full shadow-[0_0_10px_#7C3AED,0_0_2px_#FFFFFF] border border-white/80"
+          className="w-1.5 h-1.5 rounded-full shadow-[0_0_10px_#47B2E4,0_0_2px_#FFFFFF] border border-white/80"
         />
 
         {/* Floating Avionics HUD Telemetry Badge */}
@@ -212,12 +212,12 @@ export default function SpaceCursor() {
             isHovered ? 'opacity-100 scale-100 translate-y-0' : 'opacity-40 scale-95 translate-y-0.5'
           }`}
         >
-          <span className={`w-1.5 h-1.5 rounded-full ${isHovered ? 'bg-emerald-400 animate-pulse' : 'bg-[#A78BFA]'}`} />
+          <span className={`w-1.5 h-1.5 rounded-full ${isHovered ? 'bg-emerald-400 animate-pulse' : 'bg-[#47B2E4]'}`} />
           <span className="font-semibold tracking-wider text-white">
             {isHovered ? targetType : 'LEO-HUD'}
           </span>
           <span className="text-white/20">|</span>
-          <span className="text-[#C4B5FD] font-medium">
+          <span className="text-[#7CCCED] font-medium">
             {String(coords.x).padStart(4, '0')} · {String(coords.y).padStart(4, '0')}
           </span>
         </div>

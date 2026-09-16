@@ -54,7 +54,7 @@ export default function Navigation() {
 
   // Active section scroll spy
   useEffect(() => {
-    const sectionIds = ['about', 'services', 'platform', 'products', 'integrations'];
+    const sectionIds = ['about', 'services', 'platform', 'products', 'integrations', 'pricing', 'contact'];
     let ticking = false;
 
     const determineActiveSection = () => {
@@ -76,7 +76,7 @@ export default function Navigation() {
       }
 
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 60) {
-        current = 'integrations';
+        current = 'contact';
       }
 
       setActiveSection(current);
@@ -158,7 +158,7 @@ export default function Navigation() {
             to="/"
             className="flex items-center gap-2.5 sm:gap-3 flex-shrink-0 group focus:outline-none"
           >
-            <div className="relative w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] rounded-full bg-[#FFFFFF] border border-white/40 flex items-center justify-center p-1.5 shadow-[0_0_15px_rgba(255,255,255,0.25)] group-hover:scale-105 group-hover:shadow-[0_0_22px_rgba(167,139,250,0.55)] transition-all duration-300">
+            <div className="relative w-[34px] h-[34px] sm:w-[38px] sm:h-[38px] rounded-full bg-[#FFFFFF] border border-white/40 flex items-center justify-center p-1.5 shadow-[0_0_15px_rgba(255,255,255,0.25)] group-hover:scale-105 group-hover:shadow-[0_0_22px_rgba(71,178,228,0.55)] transition-all duration-300">
               <img 
                 src="/logo.svg" 
                 alt="Akashaveda Logo" 
@@ -169,7 +169,7 @@ export default function Navigation() {
               <span className="text-[15px] sm:text-[16px] font-semibold text-white tracking-tight leading-none">
                 Akashaveda
               </span>
-              <span className="hidden sm:block text-[8px] font-mono text-[#A78BFA] tracking-[0.14em] uppercase mt-0.5 opacity-90">
+              <span className="hidden sm:block text-[8px] font-mono text-[#47B2E4] tracking-[0.14em] uppercase mt-0.5 opacity-90">
                 AI MISSION CONTROL
               </span>
             </div>
@@ -196,12 +196,12 @@ export default function Navigation() {
                   {isActive && (
                     <motion.div
                       layoutId="activeNavCapsule"
-                      className="absolute inset-0 bg-white/[0.10] border border-white/12 rounded-full -z-10 shadow-[0_0_18px_rgba(167,139,250,0.22)]"
+                      className="absolute inset-0 bg-white/[0.10] border border-white/12 rounded-full -z-10 shadow-[0_0_18px_rgba(71,178,228,0.22)]"
                       transition={{ type: 'spring', stiffness: 450, damping: 32 }}
                     />
                   )}
                   {isActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#A78BFA] shadow-[0_0_8px_#7C3AED]" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#47B2E4] shadow-[0_0_8px_#2381AE]" />
                   )}
                   {link.label}
                 </a>
@@ -215,7 +215,7 @@ export default function Navigation() {
             {utcTime && (
               <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#121216] border border-white/10 text-[10px] font-mono text-[#A3A3AE]">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-[#C4B5FD] font-medium">{utcTime}</span>
+                <span className="text-[#7CCCED] font-medium">{utcTime}</span>
               </div>
             )}
 
@@ -224,9 +224,9 @@ export default function Navigation() {
               onClick={handleToggleCursor}
               title={cursorActive ? 'Disable Aerospace Reticle' : 'Enable Aerospace Reticle'}
               aria-label="Toggle Space Reticle Cursor"
-              className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-[#121216] border border-white/10 text-[#A3A3AE] hover:text-[#A78BFA] hover:border-[#A78BFA]/40 transition-colors"
+              className="hidden sm:flex items-center justify-center w-8 h-8 rounded-full bg-[#121216] border border-white/10 text-[#A3A3AE] hover:text-[#47B2E4] hover:border-[#47B2E4]/40 transition-colors"
             >
-              <Crosshair className={`w-3.5 h-3.5 ${cursorActive ? 'text-[#A78BFA]' : 'text-[#71717A]'}`} />
+              <Crosshair className={`w-3.5 h-3.5 ${cursorActive ? 'text-[#47B2E4]' : 'text-[#71717A]'}`} />
             </button>
 
             {/* Primary Action Button — Orbtrix Pill Style */}
@@ -301,7 +301,7 @@ export default function Navigation() {
                     </div>
                     <div className="flex flex-col">
                       <span className="text-base font-semibold text-white tracking-tight">Akashaveda</span>
-                      <span className="text-[8px] font-mono text-[#A78BFA] tracking-wider">AI MISSION CONTROL</span>
+                      <span className="text-[8px] font-mono text-[#47B2E4] tracking-wider">AI MISSION CONTROL</span>
                     </div>
                   </Link>
 
@@ -335,13 +335,13 @@ export default function Navigation() {
                         `}
                       >
                         <div className="flex items-center gap-3">
-                          <span className="text-[11px] font-mono text-[#A78BFA] font-medium w-5 flex-shrink-0">
+                          <span className="text-[11px] font-mono text-[#47B2E4] font-medium w-5 flex-shrink-0">
                             {String(i + 1).padStart(2, '0')}
                           </span>
                           <span>{link.label}</span>
                         </div>
                         {isActive ? (
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#A78BFA]" />
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#47B2E4]" />
                         ) : (
                           <ChevronRight className="w-4 h-4 text-white/30" />
                         )}

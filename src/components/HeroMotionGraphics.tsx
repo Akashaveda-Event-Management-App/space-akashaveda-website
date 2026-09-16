@@ -13,7 +13,7 @@ export const TelemetryGauge: React.FC<{ value: number; label: string; unit: stri
   const strokeDashoffset = circumference - (value / 100) * circumference;
 
   return (
-    <div className="flex items-center gap-3 bg-[#121216] border border-white/10 rounded-[8px] p-3 backdrop-blur-md hover:border-[#A78BFA]/30 transition-colors">
+    <div className="flex items-center gap-3 bg-[#121216] border border-white/10 rounded-[8px] p-3 backdrop-blur-md hover:border-[#47B2E4]/30 transition-colors">
       <div className="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
         <svg className="w-full h-full -rotate-90" viewBox="0 0 60 60">
           <circle
@@ -39,8 +39,8 @@ export const TelemetryGauge: React.FC<{ value: number; label: string; unit: stri
           />
           <defs>
             <linearGradient id="gauge-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#A78BFA" />
-              <stop offset="100%" stopColor="#7C3AED" />
+              <stop offset="0%" stopColor="#7CCCED" />
+              <stop offset="100%" stopColor="#47B2E4" />
             </linearGradient>
           </defs>
         </svg>
@@ -48,11 +48,11 @@ export const TelemetryGauge: React.FC<{ value: number; label: string; unit: stri
       </div>
       <div className="min-w-0">
         <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-wider truncate mb-0.5">{label}</div>
-        <div className="text-xs font-bold font-mono text-[#A78BFA] flex items-center gap-1.5">
+        <div className="text-xs font-bold font-mono text-[#47B2E4] flex items-center gap-1.5">
           <span>{value} {unit}</span>
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#A78BFA] opacity-75" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#A78BFA]" />
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#47B2E4] opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#47B2E4]" />
           </span>
         </div>
       </div>
@@ -81,8 +81,8 @@ export const MotionTelemetryWaveform: React.FC = () => {
   return (
     <div className="bg-[#121216] border border-white/10 rounded-[8px] p-3.5 backdrop-blur-md">
       <div className="flex items-center justify-between text-[10px] font-mono mb-2">
-        <div className="flex items-center gap-1.5 text-[#A78BFA]">
-          <Activity className="w-3.5 h-3.5 animate-pulse text-[#A78BFA]" />
+        <div className="flex items-center gap-1.5 text-[#47B2E4]">
+          <Activity className="w-3.5 h-3.5 animate-pulse text-[#47B2E4]" />
           <span className="font-semibold uppercase tracking-wider">Live Spectrum Demodulator</span>
         </div>
         <div className="flex items-center gap-2 text-[#71717A]">
@@ -102,10 +102,10 @@ export const MotionTelemetryWaveform: React.FC = () => {
             transition={{ type: 'spring', stiffness: 350, damping: 20 }}
             className={`flex-1 rounded-t-sm ${
               i % 4 === 0
-                ? 'bg-gradient-to-t from-[#7C3AED] via-[#A78BFA] to-white shadow-[0_0_8px_rgba(124,58,237,0.5)]'
+                ? 'bg-gradient-to-t from-[#2381AE] via-[#47B2E4] to-white shadow-[0_0_8px_rgba(71,178,228,0.5)]'
                 : i % 2 === 0
-                ? 'bg-gradient-to-t from-[#5B21B6] via-[#7C3AED] to-[#A78BFA]'
-                : 'bg-gradient-to-t from-[#4C1D95]/80 via-[#6D28D9]/80 to-[#8B5CF6]/80'
+                ? 'bg-gradient-to-t from-[#274472] via-[#2381AE] to-[#47B2E4]'
+                : 'bg-gradient-to-t from-[#1A2D4C]/80 via-[#274472]/80 to-[#7CCCED]/80'
             }`}
           />
         ))}
@@ -113,7 +113,7 @@ export const MotionTelemetryWaveform: React.FC = () => {
 
       <div className="flex justify-between items-center text-[9px] font-mono text-[#71717A] pt-2 mt-1 border-t border-white/5">
         <span>BW: 150 MHz · CCSDS TM</span>
-        <span className="text-[#A78BFA] font-medium">STREAM: 60 FPS REAL-TIME</span>
+        <span className="text-[#47B2E4] font-medium">100% LOCK</span>
       </div>
     </div>
   );
@@ -135,16 +135,16 @@ export const AutonomyTimeline: React.FC = () => {
       status: 'COMPLETED',
       detail: '1.4 GB transferred',
       time: '2m ago',
-      iconClass: 'text-[#A78BFA]',
-      badgeClass: 'bg-[#7C3AED]/15 border-[#7C3AED]/30 text-[#A78BFA]',
+      iconClass: 'text-[#47B2E4]',
+      badgeClass: 'bg-[#47B2E4]/15 border-[#47B2E4]/30 text-[#47B2E4]',
     },
     {
       name: 'Orbit Debris Maneuver',
       status: 'VERIFIED',
       detail: 'Probability < 0.0001%',
       time: 'Standby',
-      iconClass: 'text-[#C4B5FD]',
-      badgeClass: 'bg-[#8B5CF6]/15 border-[#8B5CF6]/30 text-[#C4B5FD]',
+      iconClass: 'text-[#7CCCED]',
+      badgeClass: 'bg-[#7CCCED]/15 border-[#7CCCED]/30 text-[#7CCCED]',
     },
   ];
 
@@ -152,9 +152,9 @@ export const AutonomyTimeline: React.FC = () => {
     <div className="space-y-2">
       <div className="flex justify-between items-center px-3 py-2 bg-[#121216] border border-white/10 rounded-[8px] text-[10px] font-mono">
         <span className="text-gray-300 flex items-center gap-1.5">
-          <Clock className="w-3.5 h-3.5 text-[#A78BFA]" /> Next Pass Countdown
+          <Clock className="w-3.5 h-3.5 text-[#47B2E4]" /> Next Pass Countdown
         </span>
-        <span className="text-[#A78BFA] font-bold tracking-wider">12m 44s (GS-HYD-01)</span>
+        <span className="text-[#47B2E4] font-bold tracking-wider">12m 44s (GS-HYD-01)</span>
       </div>
 
       <div className="space-y-2">
@@ -164,7 +164,7 @@ export const AutonomyTimeline: React.FC = () => {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: idx * 0.08, duration: 0.3 }}
-            className="flex items-center justify-between p-2.5 bg-[#08080A] border border-white/10 rounded-[8px] text-[11px] font-mono hover:border-[#A78BFA]/40 transition-colors"
+            className="flex items-center justify-between p-2.5 bg-[#08080A] border border-white/10 rounded-[8px] text-[11px] font-mono hover:border-[#47B2E4]/40 transition-colors"
           >
             <div className="flex items-center gap-2.5">
               <CheckCircle2 className={`w-4 h-4 ${step.iconClass} flex-shrink-0`} />
@@ -188,8 +188,8 @@ export const AnalyticsGrid: React.FC = () => {
   const metrics = [
     { label: 'Power Efficiency', val: '99.4%', status: 'NOMINAL', color: 'text-white' },
     { label: 'Thermal Balance', val: '+21.4 °C', status: 'OPTIMAL', color: 'text-emerald-400' },
-    { label: 'Uptime Reliability', val: '99.98%', status: 'SLO PASSED', color: 'text-[#A78BFA]' },
-    { label: 'Downlink Speed', val: '1.2 Gbps', status: 'HIGH SPEED', color: 'text-[#C4B5FD]' },
+    { label: 'Uptime Reliability', val: '99.98%', status: 'SLO PASSED', color: 'text-[#47B2E4]' },
+    { label: 'Downlink Speed', val: '1.2 Gbps', status: 'HIGH SPEED', color: 'text-[#7CCCED]' },
   ];
 
   return (
@@ -198,17 +198,17 @@ export const AnalyticsGrid: React.FC = () => {
         <div>
           <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-widest">Predictive Health Index</div>
           <div className="text-sm font-bold text-white font-mono flex items-center gap-1.5 mt-0.5">
-            Zero-Failure Lifecycle: <span className="text-[#A78BFA] font-extrabold">7.4 Years</span>
+            Zero-Failure Lifecycle: <span className="text-[#47B2E4] font-extrabold">7.4 Years</span>
           </div>
         </div>
-        <div className="px-2.5 py-1 rounded-full bg-[#7C3AED]/20 border border-[#7C3AED]/40 text-[#A78BFA] text-[10px] font-mono font-bold">
+        <div className="px-2.5 py-1 rounded-full bg-[#47B2E4]/20 border border-[#47B2E4]/40 text-[#47B2E4] text-[10px] font-mono font-bold">
           HEALTH: 99.8%
         </div>
       </div>
 
       <div className="grid grid-cols-2 gap-2">
         {metrics.map((m) => (
-          <div key={m.label} className="bg-[#08080A] border border-white/10 rounded-[8px] p-2.5 hover:border-[#A78BFA]/30 transition-colors">
+          <div key={m.label} className="bg-[#08080A] border border-white/10 rounded-[8px] p-2.5 hover:border-[#47B2E4]/30 transition-colors">
             <div className="text-[9px] font-mono text-[#71717A] uppercase tracking-widest">{m.label}</div>
             <div className={`text-sm font-bold font-mono ${m.color} mt-0.5`}>{m.val}</div>
             <div className="text-[9px] font-mono text-gray-500 mt-0.5">{m.status}</div>
