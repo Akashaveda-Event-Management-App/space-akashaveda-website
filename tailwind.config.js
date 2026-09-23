@@ -8,16 +8,17 @@ export default {
         xs: '360px',
       },
       fontFamily: {
-        sans: ['"Google Sans Flex"', '"Space Grotesk"', '"Outfit"', '"Segoe UI"', 'sans-serif'],
-        display: ['"Outfit"', '"Google Sans Flex"', 'sans-serif'],
+        sans: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+        display: ['"Inter"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       borderRadius: {
         sm: '4px',
+        DEFAULT: '8px',
         md: '8px',
-        lg: '16px',
-        xl: '32px',
-        btn: '8px',
+        lg: '10px',
+        card: '8px',
+        btn: '6px',
         pill: '9999px',
       },
       colors: {
