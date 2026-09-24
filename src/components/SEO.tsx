@@ -11,11 +11,11 @@ export interface SEOProps {
   structuredData?: Record<string, any> | Array<Record<string, any>>;
 }
 
-const DEFAULT_TITLE = 'Akashaveda | AI-Powered Satellite Mission Operations & Space Technology';
+const DEFAULT_TITLE = 'Akashaveda | Integrated Ground Segment Infrastructure';
 const DEFAULT_DESCRIPTION =
-  'Akashaveda revolutionizes satellite operations with cutting-edge AI automation. Autonomous mission control, real-time anomaly detection, and intelligent telemetry processing for the next generation of space missions.';
+  'Akashaveda delivers integrated ground segment infrastructure for satellite operators, combining ground communications, mission operations, and space situational awareness into a unified system.';
 const DEFAULT_KEYWORDS =
-  'satellite operations, AI satellite, mission control, space technology, satellite automation, telemetry processing, anomaly detection, space missions, LEO satellites, satellite constellation management, Akashaveda, space tech India, VYUH-MCS, CHAKRA-SSA, AOCS algorithms, ground station design';
+  'satellite operations, ground segment infrastructure, mission operations, space situational awareness, ground communications, telemetry processing, satellite ground station, Chakravyuh, Chakra SSA, Vyuh MCS, satellite tracking antenna';
 const DEFAULT_OG_IMAGE = 'https://akashaveda.com/og-image.jpg';
 const SITE_URL = 'https://akashaveda.com';
 

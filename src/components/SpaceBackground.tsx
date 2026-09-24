@@ -31,22 +31,6 @@ export const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
 
     window.addEventListener('resize', handleResize);
 
-    // Mouse tracker
-    const mouse = { x: -1000, y: -1000, radius: 160 };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-    };
-
-    const handleMouseLeave = () => {
-      mouse.x = -1000;
-      mouse.y = -1000;
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('mouseleave', handleMouseLeave);
 
     // Particle class
     interface Particle {
@@ -112,7 +96,7 @@ export const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
         ctx.restore();
       }
 
-      // Update and draw particles
+      // Update and draw subtle star points
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
         p.x += p.vx;
@@ -124,48 +108,14 @@ export const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
         if (p.y < 0) p.y = height;
         if (p.y > height) p.y = 0;
 
-        // Twinkle effect
-        p.alpha = p.baseAlpha + Math.sin(tick * p.twinkleSpeed + i) * 0.25;
-        const currentAlpha = Math.max(0.05, Math.min(0.85, p.alpha));
+        // Gentle twinkle
+        p.alpha = p.baseAlpha + Math.sin(tick * p.twinkleSpeed + i) * 0.15;
+        const currentAlpha = Math.max(0.04, Math.min(0.6, p.alpha));
 
-        // Draw particle
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `${p.color}${currentAlpha})`;
         ctx.fill();
-
-        // Connect particles near mouse
-        const dx = mouse.x - p.x;
-        const dy = mouse.y - p.y;
-        const distToMouse = Math.sqrt(dx * dx + dy * dy);
-
-        if (distToMouse < mouse.radius) {
-          const mouseLineAlpha = (1 - distToMouse / mouse.radius) * 0.25;
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(148, 163, 184, ${mouseLineAlpha})`;
-          ctx.lineWidth = 0.7;
-          ctx.stroke();
-        }
-
-        // Connect nearby particles to form constellation mesh
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const pdx = p.x - p2.x;
-          const pdy = p.y - p2.y;
-          const dist = Math.sqrt(pdx * pdx + pdy * pdy);
-
-          if (dist < 100) {
-            const lineAlpha = (1 - dist / 100) * 0.08;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(148, 163, 184, ${lineAlpha})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
       }
 
       animationFrameId = requestAnimationFrame(render);
@@ -176,8 +126,6 @@ export const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [particleCount, enableGrid]);
 
